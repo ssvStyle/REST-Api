@@ -26,10 +26,7 @@
 
 return [
     '/' => 'home@index',
-    '/home' => 'home@index',
-    '/register' => 'authorization@register',
-    '/login' => 'authorization@login',
-    '/logout' => 'authorization@logout',
+    '/v1/data' => 'api@getAll'
 ]
 
 

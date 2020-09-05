@@ -39,7 +39,6 @@ abstract class BaseController implements BaseControllerInterfase
     {
         if (!$bool) {
             http_response_code(401);
-            exit('Access Denied. You don’t have permission to access for this page <a href="/login">Login</a>');
         }
 
         return $this;

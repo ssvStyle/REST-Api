@@ -10,7 +10,7 @@ class Home extends BaseController
     public function index()
     {
 
-        echo json_encode(['base' => 'first']);
+        echo json_encode(headers_list());
 
     }
 

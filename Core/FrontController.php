@@ -40,9 +40,8 @@ class FrontController
 
         } else {
 
+            header("HTTP/1.0 404 Not Found");
             http_response_code(404);
-
-            include __DIR__ . '/../templates/404.html';
 
         }
 
