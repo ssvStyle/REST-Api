@@ -10,8 +10,7 @@ class Home extends BaseController
     public function index()
     {
 
-        echo $this->view
-            ->render('index.html.twig');
+        echo json_encode(['base' => 'first']);
 
     }
 
