@@ -25,21 +25,12 @@
 
 
 return [
-    '/' => 'home@index',
-    '/v1/data' => 'api@getAll'
-]
+    //'/' => 'home@index',
+    '/v1/data' => 'get@All',
+    '/v1/data/{id}' => 'get@byId',
+    '/v1/data/{id}/content' => 'get@byIdField',
 
-
-
-
-
-
-
-
-
-
-
-?>
+];
 
 
 

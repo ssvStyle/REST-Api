@@ -70,11 +70,16 @@ class Api extends BaseController
             preg_match('/(?<="{1}).*/u', $value,$newValue);
             $put[$key[0]] = $newValue[0];
         }
+        /**
+         *
+         *del from arr empty fields
+         *
+         */
+        $put = array_diff($put, ['', NULL, false]);
 
         echo json_encode([
             'success' => false,
             'req' => filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED),
-            'get' => $_GET,
             'post' => $_POST,
             'put' => $put,
             'headers' => $headers,

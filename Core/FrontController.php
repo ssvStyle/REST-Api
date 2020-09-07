@@ -27,15 +27,41 @@ class FrontController
 
             $parseCtrlAtMethod = new ParseCtrlAndMethodName($response['ctrlAtMethod']);
 
+            $requestMethod = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED);
 
-            $controllerName = 'App\Controllers\\'. $parseCtrlAtMethod->getCtrl();
+            switch (true) {
+                case $requestMethod === 'GET' && $parseCtrlAtMethod->getCtrl() === 'Get':
+                    $controllerName = 'App\Controllers\Get';
+                    break;
+                case $requestMethod === 'POST' && $parseCtrlAtMethod->getCtrl() === 'Post':
+                    $controllerName = 'App\Controllers\Post';
+                    break;
+                case $requestMethod === 'PUT' && $parseCtrlAtMethod->getCtrl() === 'Put':
+                    $controllerName = 'App\Controllers\Put';
+                    break;
+                case $requestMethod === 'DELETE' && $parseCtrlAtMethod->getCtrl() === 'Delete':
+                    $controllerName = 'App\Controllers\Delete';
+                    break;
+                default:
+                    exit(json_encode(
+                        [
+                            'success' => false,
+                            'error' => 'undefined method'
+                        ]
+                    ));die;
+                    break;
+            }
+
             $methodName = $parseCtrlAtMethod->getMethod();
 
             $controller = new $controllerName;
 
             $controller->setData($response['args']);
 
-            $controller->access()->$methodName();
+            header('Access-Control-Allow-Origin: *');
+            header('Content-type: application/json');
+
+            echo json_encode($controller->access()->$methodName(), JSON_UNESCAPED_UNICODE);
 
 
         } else {
