@@ -19,13 +19,15 @@ class Api extends BaseController
 
 
         $put = [];
-        $content = preg_replace('/((----------------------------[a-zA-Z0-9]*)Content-Disposition: form-data; name=")|(----------------------------[a-zA-Z0-9]*--)|[\r\n]*/', '', $content);
+        $content = preg_replace('/[\r\n]*/', '', $content);
         $content = preg_replace('/((----------------------------[a-zA-Z0-9]*)Content-Disposition: form-data; name=")|(----------------------------[a-zA-Z0-9]*--)/', '*', $content);
         $arr = explode('*', $content);
-        unset($arr[0]);
         foreach ($arr as $value){
-            preg_match('/.*(?=")/', $value, $key);
-            preg_match('/(?<=").*/', $value,$newValue);
+            if ($value === '') {
+                continue;
+            }
+            preg_match('/^[a-zA-Z0-9-_]*(?="{1})/', $value, $key);
+            preg_match('/(?<="{1}).*/', $value,$newValue);
             $put[$key[0]] = $newValue[0];
         }
 
@@ -35,7 +37,7 @@ class Api extends BaseController
             'get' => $_GET,
             'post' => $_POST,
             'put' => $put,
-            'headers' => $headers,
+            //'headers' => $headers,
         ]);
 
     }
