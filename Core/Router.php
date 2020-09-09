@@ -44,11 +44,22 @@ class Router implements \Core\Interfaces\RouterInterface
 
         }
 
+        $requestMethod = strtolower(filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED));
+
 
         foreach ($this->routeMap as $route => $ctrlAtMethod) {
 
 
-            if (preg_match($this->parseRoute->getRegexpFromRoute($route), $request, $params)) {
+            $ctrl = explode('@', $ctrlAtMethod);
+
+            //var_dump($requestMethod);
+            //var_dump($ctrl[0]);
+            //var_dump($ctrlAtMethod);
+            //var_dump((bool)preg_match($this->parseRoute->getRegexpFromRoute($route), $request, $params) && $ctrl[0] === $requestMethod);
+
+
+            if ((bool)preg_match($this->parseRoute->getRegexpFromRoute($route), $request, $params) && $ctrl[0] === $requestMethod) {
+
 
                 $args = [];
 
@@ -65,6 +76,7 @@ class Router implements \Core\Interfaces\RouterInterface
         }
 
 
+        //die;
         return $rez;
     }
 }

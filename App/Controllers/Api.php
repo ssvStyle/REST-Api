@@ -12,7 +12,7 @@ class Api extends BaseController
          * PUT method dev
          */
         header('Access-Control-Allow-Origin: *');
-        header('Content-type: application/json');
+        //header('Content-type: application/json');
 
         /**
          *
