@@ -13,8 +13,7 @@ class Put extends BaseController
          * PUT method dev
          */
         header('Access-Control-Allow-Origin: *');
-        header('Content-type: application/json');
-
+        header("Content-Type: application/json; charset=UTF-8");
         /**
          *
          *empty var $put for sanitize data
@@ -32,7 +31,9 @@ class Put extends BaseController
         $input = file_get_contents('php://input');
 
         switch (true) {
-                //multipart/form-data
+            /**
+             * multipart/form-data
+             */
             case preg_match_all('/((-*[a-zA-Z0-9]*)Content-Disposition: form-data; name=")|(--------------------------[a-zA-Z0-9]*--)/u', $input, $matches) > 0:
                 /**
                  *
@@ -75,8 +76,10 @@ class Put extends BaseController
                  */
                 $put = array_diff($put, ['', NULL, false]);
                 break;
-                //application/x-www-form-urlencoded
-            case preg_match_all('/(\w*=\w*)*&*?/', $input, $matches) > 0:
+            /**
+             * application/x-www-form-urlencoded
+             */
+            case preg_match_all('/^[\w=\w&?]*$/', $input, $matches) > 0:
 
                 $exploded = explode('&', file_get_contents('php://input'));
 
@@ -87,8 +90,14 @@ class Put extends BaseController
                     }
                 }
                 break;
-            default:
+            /**
+             * raw data json
+             */
+            case preg_match_all('/^\{[\{\}"\S:,\s]*\}$/', $input, $matches) > 0:
+                $put = json_decode($input, true);
                 break;
+            default:
+                $put = ['success' => false];
         }
 
 
@@ -100,16 +109,12 @@ class Put extends BaseController
          */
         $headers = getallheaders();
 
-
-
-
         return [
-            'success' => false,
-            //'match' => preg_match_all('/((-*[a-zA-Z0-9]*)Content-Disposition: form-data; name=")|(--------------------------[a-zA-Z0-9]*--)/u', file_get_contents('php://input'), $matches),
-            'req' => filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED),
-            'input' => file_get_contents('php://input'),
+            //'match' => preg_match_all('/^\{[\{\}"\S:,\s]*\}$/', $input, $matches) > 0,
+            //'req' => filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED),
+            //'input' => file_get_contents('php://input'),
             'put' => $put,
-            'headers' => $headers,
+            //'headers' => $headers,
         ];
 
     }
