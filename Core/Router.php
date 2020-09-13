@@ -44,22 +44,12 @@ class Router implements \Core\Interfaces\RouterInterface
 
         }
 
-        $requestMethod = strtolower(filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED));
+        $requestMethod = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED);
 
 
-        foreach ($this->routeMap as $route => $ctrlAtMethod) {
+        foreach ($this->routeMap as $web) {
 
-
-            $ctrl = explode('@', $ctrlAtMethod);
-
-            //var_dump($requestMethod);
-            //var_dump($ctrl[0]);
-            //var_dump($ctrlAtMethod);
-            //var_dump((bool)preg_match($this->parseRoute->getRegexpFromRoute($route), $request, $params) && $ctrl[0] === $requestMethod);
-
-
-            if ((bool)preg_match($this->parseRoute->getRegexpFromRoute($route), $request, $params) && $ctrl[0] === $requestMethod) {
-
+            if ((bool)preg_match($this->parseRoute->getRegexpFromRoute($web['route']), $request, $params) && $requestMethod === $web['requestMethod']) {
 
                 $args = [];
 
@@ -69,14 +59,14 @@ class Router implements \Core\Interfaces\RouterInterface
                     }
                 }
 
-                $rez['ctrlAtMethod'] = $ctrlAtMethod;
+                $rez['ctrlAtMethod'] = $web['controller'] . '@' . $web['method'];
                 $rez['args'] = $args;
 
             }
         }
 
 
-        //die;
+        //var_dump($rez);die('response');
         return $rez;
     }
 }

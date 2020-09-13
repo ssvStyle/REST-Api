@@ -1,24 +1,34 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\GET;
 
 use Core\BaseController;
 
-class Get extends BaseController
+class Data extends BaseController
 {
 
     public function all()
     {
+        $this->access(true);
         return [
             'success' => true,
-            ['id' => 1,
-            'name' => 'this'],
-            ['id' => 2,
-                'name' => 'is'],
-            ['id' => 3,
-            'name' => 'REST'],
-            ['id' => 4,
-                'name' => 'Api'],
+            [
+                'id' => 1,
+                'name' => 'REST api',
+                'content' => 'бла бла бла то такое Lorem Ipsum? Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.'
+            ],
+            [
+                'id' => 2,
+                'name' => 'is'
+            ],
+            [
+                'id' => 3,
+            'name' => 'REST'
+            ],
+            [
+                'id' => 4,
+                'name' => 'Api'
+            ],
             ];
 
     }
