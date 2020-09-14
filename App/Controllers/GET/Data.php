@@ -2,42 +2,34 @@
 
 namespace App\Controllers\GET;
 
-use App\Models\DbTxt;
+use App\Models\Services\GetData;
 use Core\BaseController;
 use Firebase\JWT\JWT;
 
 
 class Data extends BaseController
 {
+    protected $dataFacade;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->dataFacade = new GetData();
+    }
 
     public function all()
     {
-        //$this->access(false);
-        $headers = getallheaders();
-
-        //$token = $headers['token'] ?? '';
-
-        //$decoded = JWT::decode($token, 'example_key', array('HS256'));
-
-        $db = new DbTxt();
-        $db->save('data', []);
-        return $db->getAll( 'data');
-
+        return $this->dataFacade->all();
     }
 
     public function byId()
     {
-
-        $db = new DbTxt();
-        return $db->getById( 'data' , (int)$this->data['id']);
-
+        return $this->dataFacade->byId((int)$this->data['id']);
     }
 
     public function byIdField()
     {
-        $db = new DbTxt();
-        return $db->getByIdField( 'data' , (int)$this->data['id'], (string)$this->data['field']);
-
+        return $this->dataFacade->byIdAndField((int)$this->data['id'], (string)$this->data['field']);
     }
 
 }

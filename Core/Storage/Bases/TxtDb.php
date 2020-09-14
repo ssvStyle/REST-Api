@@ -3,19 +3,37 @@
 namespace App\Models;
 
 
-class DbTxt
+use Core\Interfaces\Db\DataBaseInterface;
+
+class TxtDb implements DataBaseInterface
 {
     protected $data = __DIR__ . '/../../dbTxt/data.db';
     protected $user = __DIR__ . '/../../dbTxt/user.db';
     protected $token = __DIR__ . '/../../dbTxt/token.db';
 
-    public function save(string $db, array $data)
+    public function query($file, $data = [])
     {
-        $data['id'] = $this->getMaxId($db)+1;
-        $toBeSaved = serialize($data);
+        if (!empty($data)) {
+            $data['id'] = $this->getMaxId($db)+1;
+            $toBeSaved = serialize($data);
 
-        file_put_contents($this->$db, $toBeSaved . PHP_EOL, FILE_APPEND);
+            file_put_contents($this->$db, $toBeSaved . PHP_EOL, FILE_APPEND | LOCK_EX);
+        }
+    }
 
+    public function queryRetObj($file, $data = [], $class)
+    {
+        //TODO
+    }
+
+    public function execute()
+    {
+        //TODO
+    }
+
+    public function getLastInsertId()
+    {
+        //TODO
     }
 
     public function getAll(string $db): array

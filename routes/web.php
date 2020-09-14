@@ -55,13 +55,6 @@ return [
                 'controller' => 'POST\Auth',
                 'method' => 'login',
             ],
-    /*'web' => [
-        '/v1/data' => 'get@All',
-        '/v1/data/{id}' => 'get@byId',
-        '/v1/data/{id}/content' => 'get@byIdField',
-        '/v1/data/post/create' => 'data/post@create',
-        '/v1/data/post/edit' => 'put@edit',
-    ]*/
 ];
 
 

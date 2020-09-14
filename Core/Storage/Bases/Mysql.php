@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace Bases;
 
+use Core\Interfaces\Db\DataBaseInterface;
 
-class Db
+class Mysql implements DataBaseInterface
 {
     protected $dbh;
 

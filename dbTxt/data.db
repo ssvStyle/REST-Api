@@ -9,4 +9,5 @@ a:3:{s:4:"name";s:4:"next";s:7:"content";s:13:"blah blah bla";s:2:"id";i:8;}
 a:3:{s:4:"name";s:4:"next";s:7:"content";s:13:"blah blah bla";s:2:"id";i:9;}
 a:3:{s:4:"name";s:4:"next";s:7:"content";s:13:"blah blah bla";s:2:"id";i:10;}
 a:3:{s:4:"name";s:4:"next";s:7:"content";s:13:"blah blah bla";s:2:"id";i:11;}
-a:1:{s:2:"id";i:12;}
+a:3:{s:4:"name";s:3:"ssv";s:7:"content";s:9:"foo bar 5";s:2:"id";i:12;}
+a:3:{s:4:"name";s:3:"ssv";s:7:"content";s:9:"foo bar 5";s:2:"id";i:13;}
