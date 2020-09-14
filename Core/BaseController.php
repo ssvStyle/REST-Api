@@ -39,6 +39,9 @@ abstract class BaseController implements BaseControllerInterfase
     {
         if (!$bool) {
             http_response_code(401);
+            exit(json_encode([
+                'Status'=>'401 Unauthorized'
+            ]));
         }
 
         return $this;

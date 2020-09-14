@@ -11,8 +11,6 @@ class Auth extends BaseController
     public function login()
     {
 
-        $headers = getallheaders();
-
         $authService = new AuthService();
 
         return $authService->set($_POST);

@@ -35,7 +35,7 @@ class FrontController
             $controller->setData($response['args']);
 
             header('Access-Control-Allow-Origin: *');
-            //header('Content-type: application/json');
+            header('Content-type: application/json');
 
             echo json_encode($controller->access()->$methodName(), JSON_UNESCAPED_UNICODE);
 

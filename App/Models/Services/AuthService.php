@@ -12,7 +12,6 @@ class AuthService
 
         if ($post['login'] === 'ssv' && $post['pass'] == 123) {
 
-
             $key = "example_key";
             $payload = array(
                 "iss" => "http://example.org",

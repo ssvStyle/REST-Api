@@ -38,7 +38,7 @@ return [
                 'method' => 'byId',
             ],
             [
-                'route' => '/v1/data/{id}/content',
+                'route' => '/v1/data/{id}/{field}',
                 'requestMethod' => 'GET',
                 'controller' => 'GET\Data',
                 'method' => 'byIdField',
@@ -50,7 +50,7 @@ return [
                 'method' => 'create',
             ],
             [
-                'route' => '/v1/login',
+                'route' => '/v1/user/login',
                 'requestMethod' => 'POST',
                 'controller' => 'POST\Auth',
                 'method' => 'login',
