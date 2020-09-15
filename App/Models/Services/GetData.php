@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models\Services;
-use App\Models\Db;
+use Core\Storage\CreateMysql as Db;
 
 /**
  * Class GetData
@@ -37,6 +37,7 @@ class GetData
      */
     public function all() :array
     {
+
         $sql = 'SELECT tasks.id, name 
                 FROM tasks
                 LEFT JOIN status ON tasks.status_id = status.id';

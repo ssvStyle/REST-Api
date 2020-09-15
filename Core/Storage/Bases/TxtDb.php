@@ -1,7 +1,5 @@
 <?php
-
-namespace App\Models;
-
+namespace Core\Storage\Bases;
 
 use Core\Interfaces\Db\DataBaseInterface;
 

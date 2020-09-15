@@ -1,6 +1,5 @@
 <?php
-
-namespace Bases;
+namespace Core\Storage\Bases;
 
 use Core\Interfaces\Db\DataBaseInterface;
 
@@ -10,7 +9,7 @@ class Mysql implements DataBaseInterface
 
     public function __construct()
     {
-        $config = (include __DIR__ . '/../../config/connection.php')['mysql'];
+        $config = (include __DIR__ . '/../../../config/connection.php')['mysql'];
         $this->dbh = new \PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['dbname'].';charset=utf8', $config['user'], $config['pass']);
     }
 

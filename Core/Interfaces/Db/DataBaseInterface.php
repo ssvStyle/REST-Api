@@ -8,7 +8,7 @@ interface DataBaseInterface
 
     public function queryRetObj($sql, $data = [], $class);
 
-    public function execute();
+    public function execute($sql, $data = []);
 
     public function getLastInsertId();
 }
