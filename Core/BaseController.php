@@ -5,7 +5,7 @@ namespace Core;
 use App\View;
 use Core\Interfaces\BaseController as BaseControllerInterfase;
 use App\Models\Authorization as AuthModel;
-use App\Models\Db;
+use Core\Storage\Bases\Mysql as Db;
 
 abstract class BaseController implements BaseControllerInterfase
 {

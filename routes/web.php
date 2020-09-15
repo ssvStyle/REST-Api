@@ -55,6 +55,20 @@ return [
                 'controller' => 'POST\Auth',
                 'method' => 'login',
             ],
+    /** >>>>>>>>>>>>>>>>>>>>>route for unit tests<<<<<<<<<<<<<<<<<<<<<<<<<<< */
+            [
+                'route' => '/v1/unit',
+                'requestMethod' => 'GET',
+                'controller' => 'UnitTest',
+                'method' => 'DataValidTest',
+            ]
+    /** <<<<<<<<<<<<<< end unit test route >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+            ,[
+                'route' => '/v1/user/login',
+                'requestMethod' => 'POST',
+                'controller' => 'POST\Auth',
+                'method' => 'login',
+            ],
 ];
 
 

@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use \App\Models\Db as db;
+use Core\Storage\Bases\Mysql as db;
+use Core\Interfaces\Db\DataBaseInterface;
 
 class Authorization
 {
@@ -17,7 +18,7 @@ class Authorization
      * @param \App\Models\Db $db
      *
      */
-    public function __construct(Db $db)
+    public function __construct(DataBaseInterface $db)
     {
             $this->db = $db;
 
