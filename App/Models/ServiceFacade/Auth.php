@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Services;
+namespace App\Models\ServiceFacade;
 
 use Firebase\JWT\JWT;
 
-class AuthService
+class Auth
 {
 
     public function set($post)

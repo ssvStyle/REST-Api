@@ -3,7 +3,7 @@
 namespace App\Controllers\POST;
 
 use Core\BaseController;
-use App\Models\Services\AuthService;
+use App\Models\ServiceFacade\Auth as AuthFacade;
 
 class Auth extends BaseController
 {
@@ -11,9 +11,9 @@ class Auth extends BaseController
     public function login()
     {
 
-        $authService = new AuthService();
+        $authFacade = new AuthFacade();
 
-        return $authService->set($_POST);
+        return $authFacade->set($_POST);
     }
 
 }

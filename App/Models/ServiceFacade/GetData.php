@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Services;
+namespace App\Models\ServiceFacade;
 use Core\Storage\CreateMysql as Db;
 
 /**
  * Class GetData
  * pattern Facade
  *
- * @package App\Models\Services
+ * @package App\Models\ServiceFacade
  */
 class GetData
 {

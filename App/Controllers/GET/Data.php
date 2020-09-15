@@ -2,34 +2,34 @@
 
 namespace App\Controllers\GET;
 
-use App\Models\Services\GetData;
+use App\Models\ServiceFacade\GetData;
 use Core\BaseController;
 use Firebase\JWT\JWT;
 
 
 class Data extends BaseController
 {
-    protected $dataFacade;
+    protected $getDataFacade;
 
     public function __construct()
     {
         parent::__construct();
-        $this->dataFacade = new GetData();
+        $this->getDataFacade = new GetData();
     }
 
     public function all()
     {
-        return $this->dataFacade->all();
+        return $this->getDataFacade->all();
     }
 
     public function byId()
     {
-        return $this->dataFacade->byId((int)$this->data['id']);
+        return $this->getDataFacade->byId((int)$this->data['id']);
     }
 
     public function byIdField()
     {
-        return $this->dataFacade->byIdAndField((int)$this->data['id'], (string)$this->data['field']);
+        return $this->getDataFacade->byIdAndField((int)$this->data['id'], (string)$this->data['field']);
     }
 
 }
