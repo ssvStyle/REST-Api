@@ -26,35 +26,41 @@
 
 return [
     'api' => [
-                'route' => '/v1/data',
-                'requestMethod' => 'GET',
-                'controller' => 'GET\Data',
-                'method' => 'all',
-            ],
-            [
-                'route' => '/v1/data/{id}',
-                'requestMethod' => 'GET',
-                'controller' => 'GET\Data',
-                'method' => 'byId',
-            ],
-            [
-                'route' => '/v1/data/{id}/{field}',
-                'requestMethod' => 'GET',
-                'controller' => 'GET\Data',
-                'method' => 'byIdField',
-            ],
-            [
-                'route' => '/v1/data',
-                'requestMethod' => 'POST',
-                'controller' => 'POST\NewData',
-                'method' => 'add',
-            ],
-            [
-                'route' => '/v1/user/login',
-                'requestMethod' => 'POST',
-                'controller' => 'POST\Auth',
-                'method' => 'login',
-            ],
+        'route' => '/v1/data',
+        'requestMethod' => 'GET',
+        'controller' => 'GET\Data',
+        'method' => 'all',
+    ],
+    [
+        'route' => '/v1/data/{id}',
+        'requestMethod' => 'GET',
+        'controller' => 'GET\Data',
+        'method' => 'byId',
+    ],
+    [
+        'route' => '/v1/data/{id}/{field}',
+        'requestMethod' => 'GET',
+        'controller' => 'GET\Data',
+        'method' => 'byIdField',
+    ],
+    [
+        'route' => '/v1/data',
+        'requestMethod' => 'POST',
+        'controller' => 'POST\NewData',
+        'method' => 'add',
+    ],
+    [
+        'route' => '/v1/user/login',
+        'requestMethod' => 'POST',
+        'controller' => 'POST\Auth',
+        'method' => 'login',
+    ],
+    [
+        'route' => '/v1/data',
+        'requestMethod' => 'PUT',
+        'controller' => 'PUT\EditData',
+        'method' => 'update',
+    ],
 ];
 
 

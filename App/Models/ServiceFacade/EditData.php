@@ -5,13 +5,13 @@ use App\Models\ModelsInterfaces\DataValidationInterface;
 use Core\Storage\Bases\Mysql;
 
 /**
- * Class AddData
+ * Class EditData
  *
- * add data facade
+ * EditData facade
  *
  * @package App\Models\ServiceFacade
  */
-class AddData
+class EditData
 {
     /**
      * Validation data obj
@@ -28,7 +28,7 @@ class AddData
     private $db;
 
     /**
-     * AddData constructor.
+     * EditData constructor.
      *
      * @param DataValidationInterface $dataValidation
      */
@@ -69,15 +69,23 @@ class AddData
         if (empty($error['errors'])) {
 
             $data = $this->validData->getValidData();
-            $sql  = 'INSERT INTO tasks (name, email, job, status_id, admin_edit) 
-                                VALUES (\''.$data['name'].'\', \''.$data['email'].'\', \''.$data['job'].'\', \''.$data['status'].'\', 0)';
-            $status = $this->db->execute($sql, []);
+            $sql  = 'UPDATE tasks SET name=:name, email=:email, job=:job, status_id=:status, admin_edit=:adminEdit  WHERE id=:id';
 
+            $forUpdate = [
+                ':name' => $data['name'],
+                ':email' => $data['email'],
+                ':job' => $data['job'],
+                ':status' => $data['status'],
+                ':adminEdit' => true,
+                ':id' => (int)$data['id'],
+            ];
+            //$status = $this->db->execute($sql, $forUpdate);
             return [
                 'success' => $status,
             ];
         }
 
+        //return $data;
         return $error;
     }
 
