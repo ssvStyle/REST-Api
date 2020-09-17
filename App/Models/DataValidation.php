@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Models\ModelsInterfaces\DataValidationInterface;
 
 /**
  * Class DataValidation
@@ -11,7 +12,7 @@ namespace App\Models;
  * @package App\Models
  */
 
-class DataValidation
+class DataValidation implements DataValidationInterface
 {
     /**
      * var data (all data container)

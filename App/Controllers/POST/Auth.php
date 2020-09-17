@@ -12,7 +12,6 @@ class Auth extends BaseController
     {
 
         $authFacade = new AuthFacade();
-
         return $authFacade->set($_POST);
     }
 

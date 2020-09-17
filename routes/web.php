@@ -46,8 +46,8 @@ return [
             [
                 'route' => '/v1/data',
                 'requestMethod' => 'POST',
-                'controller' => 'post',
-                'method' => 'create',
+                'controller' => 'POST\NewData',
+                'method' => 'add',
             ],
             [
                 'route' => '/v1/user/login',
