@@ -2,7 +2,7 @@
 
 namespace App\Controllers\POST;
 use App\Models\DataValidation;
-use App\Models\ServiceFacade\AddData;
+use App\Models\ServiceFacade\Save\Insert;
 use Core\BaseController;
 
 /**
@@ -22,8 +22,8 @@ class NewData extends BaseController
     public function add()
     {
 
-        $addDataFacade = new AddData(new DataValidation($_POST));
-        return $addDataFacade->save();
+        $addDataFacade = new Insert(new DataValidation($_POST));
+        return $addDataFacade->checkAndSave();
 
     }
 

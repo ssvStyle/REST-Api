@@ -1,31 +1,31 @@
 <?php
 
-namespace App\Models\ServiceFacade;
+namespace App\Models\ServiceFacade\Save;
+
 use App\Models\ModelsInterfaces\DataValidationInterface;
 use Core\Storage\Bases\Mysql;
 
 /**
- * Class EditData
+ * Class AddData
  *
- * EditData facade
  *
- * @package App\Models\ServiceFacade
+ * @package App\Models\ServiceFacade\Save
  */
-class EditData
+abstract class AddData
 {
     /**
      * Validation data obj
      *
      * @var $validData
      */
-    private $validData;
+    protected $validData;
 
     /**
      * data base obj
      *
      * @var $db
      */
-    private $db;
+    protected $db;
 
     /**
      * EditData constructor.
@@ -45,7 +45,7 @@ class EditData
      *
      * @return array errors or save status
      */
-    public function save()
+    public function checkAndSave():array
     {
 
         $error['errors'] = [];
@@ -68,28 +68,19 @@ class EditData
 
         if (empty($error['errors'])) {
 
-            $data = $this->validData->getValidData();
-            $sql  = 'UPDATE tasks SET name=:name, email=:email, job=:job, status_id=:status, admin_edit=:adminEdit  WHERE id=:id';
 
-            $forUpdate = [
-                ':name' => $data['name'],
-                ':email' => $data['email'],
-                ':job' => $data['job'],
-                ':status' => $data['status'],
-                ':adminEdit' => true,
-                ':id' => (int)$data['id'],
-            ];
-            //$status = $this->db->execute($sql, $forUpdate);
             return [
-                'success' => $status,
+                'success' => $this->save(),
             ];
         }
 
-        //return $data;
         return $error;
     }
 
-
-
-
+    /**
+     * insert or update
+     *
+     * @return bool
+     */
+    abstract public function save():bool;
 }

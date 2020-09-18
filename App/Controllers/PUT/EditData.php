@@ -19,8 +19,8 @@ class EditData extends BaseController
 
     public function update()
     {
-        $edit  = new \App\Models\ServiceFacade\EditData(new DataValidation(GetPutData::fromPhpInput()));
-        return $edit->save();
+        $edit  = new \App\Models\ServiceFacade\Save\Update(new DataValidation(GetPutData::fromPhpInput()));
+        return $edit->checkAndSave();
     }
 
 }
