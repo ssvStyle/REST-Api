@@ -35,16 +35,5 @@ abstract class BaseController implements BaseControllerInterfase
         $this->data = $data;
     }
 
-    public function access($bool = true)
-    {
-        if (!$bool) {
-            http_response_code(401);
-            exit(json_encode([
-                'Status'=>'401 Unauthorized'
-            ]));
-        }
-
-        return $this;
-    }
-
+    abstract public function access($bool = null);
 }

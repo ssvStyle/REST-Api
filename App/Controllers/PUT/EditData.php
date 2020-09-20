@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Controllers\PUT;
+use App\Controllers\AccessController;
 use App\Models\DataValidation;
 use App\Models\GetPutData;
-use Core\BaseController;
 
 /**
  * Class EditData
@@ -14,7 +14,7 @@ use Core\BaseController;
  *
  * @package App\Controllers\PUT
  */
-class EditData extends BaseController
+class EditData extends AccessController
 {
 
     public function update()

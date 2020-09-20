@@ -29,15 +29,16 @@ class Authorization
      * 
      * @return bool
      */
-    public function userVerify()
+    public function userVerify(object $userTokenData)
     {
-        $hash = $_SESSION['UserHash'] ?? false;
 
-        if ($hash) {
+        if ($userTokenData) {
 
-            $sql = 'SELECT * FROM users WHERE sessionHash=:hash';
+            $sql = 'SELECT * FROM users WHERE id=:id';
 
-            if ($this->db->query($sql, [':hash' => $hash])) {
+            if ($this->db->query($sql, [
+                ':id' => $userTokenData->userId,
+                ])[0]) {
 
                 return true;
 
@@ -106,22 +107,25 @@ class Authorization
     {
         if ($this->loginExist($login)) {
 
-            $sql = 'SELECT users.id, login, pass, sessionHash, usersStatus.status FROM users
+            $sql = 'SELECT users.id, login, pass, hash, usersStatus.status FROM users
                     LEFT JOIN usersStatus ON users.status_id=usersStatus.id
                     WHERE login=:login';
-            $user = $this->db->queryRetObj($sql, [':login' => $login], '\App\Models\User')[0] ?? false;
+            $user = $this->db->query($sql, [':login' => $login])[0] ?? false;
 
-            if ($user) {
-                if ( password_verify($pass, $user->getPass()) ) {
-                    $this->user = $user;
-                    return true;
-                }
+            if ($user && password_verify($pass, $user['pass'])) {
+                $this->user['id'] = $user['id'];
+                $this->user['status'] = $user['status'];
+
+                return true;
             }
 
         }
-
         return false;
+    }
 
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**

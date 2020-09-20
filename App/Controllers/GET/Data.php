@@ -2,12 +2,13 @@
 
 namespace App\Controllers\GET;
 
+use App\Controllers\AccessController;
 use App\Models\ServiceFacade\GetData;
 use Core\BaseController;
 use Firebase\JWT\JWT;
 
 
-class Data extends BaseController
+class Data extends AccessController
 {
     protected $getDataFacade;
 

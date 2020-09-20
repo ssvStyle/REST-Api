@@ -28,7 +28,7 @@ class Router implements \Core\Interfaces\RouterInterface
 
     public function response()
     {
-        $rez = [];
+        $res = [];
 
         $patternGetParams = '~([?]\w*[=]\w*).+~';
 
@@ -50,7 +50,7 @@ class Router implements \Core\Interfaces\RouterInterface
         foreach ($this->routeMap as $web) {
 
             if ((bool)preg_match($this->parseRoute->getRegexpFromRoute($web['route']), $request, $params) && $requestMethod === $web['requestMethod']) {
-
+                //405 - Method not allowed
                 $args = [];
 
                 foreach ($params as $k => $v) {
@@ -59,14 +59,15 @@ class Router implements \Core\Interfaces\RouterInterface
                     }
                 }
 
-                $rez['ctrlAtMethod'] = $web['controller'] . '@' . $web['method'];
-                $rez['args'] = $args;
+                $res['access'] = $web['access'] ?? false;
+                $res['ctrlAtMethod'] = $web['controller'] . '@' . $web['method'];
+                $res['args'] = $args;
 
             }
         }
 
 
-        //var_dump($rez);die('response');
-        return $rez;
+        //var_dump($res);die('response');
+        return $res;
     }
 }

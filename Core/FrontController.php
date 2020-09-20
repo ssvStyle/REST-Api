@@ -23,6 +23,9 @@ class FrontController
 
         $response = $router->response();
 
+        header('Access-Control-Allow-Origin: *');
+        header('Content-type: application/json');
+
         if ($response){
 
             $parseCtrlAtMethod = new ParseCtrlAndMethodName($response['ctrlAtMethod']);
@@ -34,11 +37,7 @@ class FrontController
 
             $controller->setData($response['args']);
 
-            header('Access-Control-Allow-Origin: *');
-            header('Content-type: application/json');
-
-            echo json_encode($controller->access()->$methodName(), JSON_UNESCAPED_UNICODE);
-
+            echo json_encode($controller->access($response['access'])->$methodName(), JSON_UNESCAPED_UNICODE);
 
         } else {
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers\POST;
+use App\Controllers\AccessController;
 use App\Models\DataValidation;
 use App\Models\ServiceFacade\Save\Insert;
 use Core\BaseController;
@@ -14,7 +15,7 @@ use Core\BaseController;
  *
  * @package App\Controllers\POST
  */
-class NewData extends BaseController
+class NewData extends AccessController
 {
     /**
      * @return array

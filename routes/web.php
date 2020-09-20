@@ -50,16 +50,23 @@ return [
         'method' => 'add',
     ],
     [
-        'route' => '/v1/user/login',
+        'route' => '/v1/login',
         'requestMethod' => 'POST',
         'controller' => 'POST\Auth',
         'method' => 'login',
+        'access' => true,
     ],
     [
         'route' => '/v1/data',
         'requestMethod' => 'PUT',
         'controller' => 'PUT\EditData',
         'method' => 'update',
+    ],
+    [
+        'route' => '/v1/data/{id}',
+        'requestMethod' => 'DELETE',
+        'controller' => 'DELETE\Delete',
+        'method' => 'oneById',
     ],
 ];
 
