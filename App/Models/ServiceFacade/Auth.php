@@ -2,38 +2,72 @@
 
 namespace App\Models\ServiceFacade;
 
+use App\Models\Authorization;
+use Core\Storage\Bases\Mysql;
 use Firebase\JWT\JWT;
 
 class Auth
 {
+    protected $authorization;
 
-    public function set($post)
+    public function __construct()
+    {
+        $this->authorization = new Authorization(new Mysql());
+
+    }
+    public function getToken($post)
     {
 
-        if ($post['login'] === 'ssv' && $post['pass'] == 123) {
+        $login = $post['login'] ?? '';
+        $pass = $post['pass'] ?? '';
+
+
+
+
+        if ($this->authorization->loginAndPassValidation($login, $pass)) {
+
+            $user = $this->authorization->getUser();
 
             $key = "example_key";
-            $payload = array(
-                "iss" => "http://example.org",
-                "aud" => "http://example.com",
-                "iat" => 1356999524,
-                "nbf" => 1357000000
-            );
+            $payload = [
+                'iss' => 'http://example.org',
+                'aud' => 'http://example.com',
+                'iat' => time(),
+                'exp' => time() + 24*60*60,
+                'sub' => 'auth',
+                'userId' =>$user['id'],
+                'userStatus' =>$user['status'],
+            ];
 
-            $jwt = JWT::encode($payload, $key);
+            $jwt = JWT::encode($payload, $key, 'HS256');
 
-            $decoded = JWT::decode($jwt, $key, array('HS256'));
+
 
             return [
                 'success' => true,
                 'token' => $jwt,
-                'decoded' => $decoded,
             ];
         }
 
         return [
             'success' => false,
         ];
+    }
+
+    public function checkToken($token)
+    {
+        $key = "example_key";
+        $res = false;
+        try {
+            $res = $this->authorization->userVerify(JWT::decode($token, $key, ['HS256']));
+        } catch (\Exception $a) {
+
+            //add too log
+
+        } finally {
+
+            return $res;
+        }
 
     }
 
