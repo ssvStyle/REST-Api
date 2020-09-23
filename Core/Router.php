@@ -60,14 +60,12 @@ class Router implements \Core\Interfaces\RouterInterface
                 }
 
                 $res['access'] = $web['access'] ?? false;
-                $res['ctrlAtMethod'] = $web['controller'] . '@' . $web['method'];
+                $res['controller'] = $web['controller'];
+                $res['method'] = $web['method'];
                 $res['args'] = $args;
 
             }
         }
-
-
-        //var_dump($res);die('response');
         return $res;
     }
 }

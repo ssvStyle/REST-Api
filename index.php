@@ -3,6 +3,8 @@
 include __DIR__ . '/vendor/autoload.php';
 
 use Core\FrontController;
+use Core\Router;
+
 
 /**
  * SIMON-LIB
@@ -12,6 +14,6 @@ use Core\FrontController;
  */
 
 
-$myApp = new FrontController();
+$myApp = new FrontController(new Router(  $_SERVER['REQUEST_URI'] ));
 
 $myApp->run();

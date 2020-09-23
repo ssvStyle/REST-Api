@@ -3,6 +3,7 @@
 namespace Core;
 
 use App\Controllers\Home;
+use Core\Interfaces\RouterInterface;
 
 /**
  * Class FrontController
@@ -11,27 +12,38 @@ use App\Controllers\Home;
  */
 class FrontController
 {
+    /**
+     * @var router
+     */
+    protected $router;
 
     /**
+     * FrontController constructor.
      *
+     * @param RouterInterface $router
+     */
+    public function __construct(RouterInterface $router)
+    {
+        $this->router = $router;
+    }
+
+    /**
+     * Run app
      *
+     * @return mixed
      */
     public function run()
     {
 
-        $router = new Router( $_SERVER['REQUEST_URI'] );
-
-        $response = $router->response();
+        $response = $this->router->response();
 
         header('Access-Control-Allow-Origin: *');
         header('Content-type: application/json');
 
         if ($response){
 
-            $parseCtrlAtMethod = new ParseCtrlAndMethodName($response['ctrlAtMethod']);
-
-            $controllerName = 'App\Controllers\\' . $parseCtrlAtMethod->getCtrl();
-            $methodName = $parseCtrlAtMethod->getMethod();
+            $controllerName = 'App\Controllers\\' . ucfirst($response['controller']);
+            $methodName = $response['method'];
 
             $controller = new $controllerName;
 
