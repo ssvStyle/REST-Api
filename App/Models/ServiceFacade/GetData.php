@@ -23,6 +23,8 @@ class GetData
 
     /**
      * GetData constructor.
+     *
+     *
      */
     public function __construct()
     {
@@ -96,12 +98,12 @@ class GetData
                 return $this->error;
         }
 
-        $sql = 'SELECT '.$sqlField.'
+        $sql = 'SELECT field
                 FROM tasks
                 LEFT JOIN status ON tasks.status_id = status.id
-                WHERE tasks.id = :id';
+                WHERE tasks.id = :id AND field=:field';
 
-        return $this->db->query($sql, [':id' => $id])[0] ?? $this->error;
+        return $this->db->query($sql, [':id' => $id, ':field' => $sqlField])[0] ?? $this->error;
     }
 
 }
